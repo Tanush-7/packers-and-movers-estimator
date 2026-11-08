@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Packers and Movers Estimator — Bangalore</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f4f3ec;
+        --surface: #ffffff;
+        --surface-2: #efeee4;
+        --ink: #1d2420;
+        --muted: #5d685f;
+        --line: #dddacd;
+        --green: #17684b;
+        --green-soft: #e3efe7;
+        --amber: #b96f00;
+        --amber-soft: #f7ead2;
+        --red: #b3372a;
+        --red-soft: #f9e3df;
+        --panel: #0d3b2a;
+        --panel-2: #0a2f21;
+        --panel-ink: #f2efe2;
+        --panel-muted: #a9c4b4;
+        --panel-line: rgba(242, 239, 226, 0.18);
+        --panel-bar: #e8a33d;
+        --shadow: 0 1px 2px rgba(20, 30, 24, 0.06), 0 8px 28px rgba(20, 30, 24, 0.07);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #10130f;
+          --surface: #1a1e1a;
+          --surface-2: #22271f;
+          --ink: #eceade;
+          --muted: #9aa79c;
+          --line: #31382f;
+          --green: #43b183;
+          --green-soft: #1d2f26;
+          --amber: #e0a458;
+          --amber-soft: #33291a;
+          --red: #e07a6c;
+          --red-soft: #37211d;
+          --panel: #0a2e20;
+          --panel-2: #07231a;
+          --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 28px rgba(0, 0, 0, 0.35);
+        }
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 56px; }
+
+      /* Header */
+      .masthead { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 8px; }
+      .truck-badge {
+        flex: 0 0 auto; width: 52px; height: 52px; border-radius: 12px;
+        background: var(--green); display: grid; place-items: center;
+      }
+      .truck-badge svg { width: 30px; height: 30px; }
+      h1 { font-size: clamp(26px, 4.5vw, 38px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; margin: 2px 0 6px; }
+      .lede { color: var(--muted); max-width: 62ch; margin: 0; font-size: 16.5px; }
+      .lede strong { color: var(--ink); font-weight: 600; }
+
+      /* Layout */
+      .layout { display: grid; grid-template-columns: minmax(0, 1fr) 408px; gap: 24px; align-items: start; margin-top: 24px; }
+      @media (max-width: 980px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+
+      .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); }
+      .form-card { padding: 6px 26px 10px; }
+      @media (max-width: 560px) { .form-card { padding: 4px 18px 8px; } .wrap { padding: 20px 14px 44px; } .masthead { flex-direction: column; gap: 10px; } }
+      section.step { padding: 20px 0 22px; border-bottom: 1px solid var(--line); }
+      section.step:last-child { border-bottom: none; }
+      .step-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+      .step-num {
+        flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%;
+        background: var(--green-soft); color: var(--green);
+        font-size: 13px; font-weight: 800; display: grid; place-items: center;
+        transform: translateY(3px);
+      }
+      .step-head h2 { font-size: 17.5px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+      .step-head p { margin: 0 0 0 auto; color: var(--muted); font-size: 13.5px; text-align: right; }
+      @media (max-width: 560px) { .step-head p { display: none; } }
+
+      /* Segmented control */
+      .segmented { display: grid; grid-template-columns: 1fr 1fr; background: var(--surface-2); border-radius: 12px; padding: 4px; gap: 4px; }
+      .segmented button {
+        appearance: none; border: none; background: transparent; color: var(--muted);
+        font: inherit; font-weight: 600; font-size: 15px; padding: 11px 8px; border-radius: 9px; cursor: pointer;
+      }
+      .segmented button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 4px rgba(20,30,24,.14); }
+      .segmented button small { display: block; font-weight: 500; font-size: 12.5px; color: var(--muted); margin-top: 1px; }
+
+      /* Choice cards (radio) */
+      .choices { display: grid; gap: 10px; }
+      .choices.cols-3 { grid-template-columns: repeat(3, 1fr); }
+      .choices.cols-2 { grid-template-columns: repeat(2, 1fr); }
+      @media (max-width: 620px) { .choices.cols-3 { grid-template-columns: 1fr; } }
+      .choice { position: relative; display: block; cursor: pointer; }
+      .choice input { position: absolute; top: 12px; right: 12px; width: 19px; height: 19px; margin: 0; accent-color: var(--green); cursor: pointer; z-index: 1; }
+      .choice .box {
+        display: block;
+        border: 1.5px solid var(--line); border-radius: 12px; padding: 13px 40px 13px 14px; height: 100%;
+        transition: border-color .15s ease, background .15s ease;
+      }
+      .choice .box b { display: block; font-size: 16px; font-weight: 700; }
+      .choice .box span { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; line-height: 1.4; }
+      .choice input:checked + .box { border-color: var(--green); background: var(--green-soft); }
+      .choice input:focus-visible + .box { outline: 2px solid var(--green); outline-offset: 2px; }
+      .choice .price-hint { color: var(--green); font-weight: 700; font-size: 13px; }
+
+      /* Sliders & fields */
+      .dist-row { display: flex; align-items: baseline; gap: 12px; }
+      .dist-value { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+      .dist-value small { font-size: 16px; font-weight: 600; color: var(--muted); }
+      input[type="range"] { width: 100%; accent-color: var(--green); height: 28px; cursor: pointer; }
+      .scale-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: 12.5px; margin-top: -2px; }
+      .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+      .chip {
+        appearance: none; border: 1px solid var(--line); background: var(--surface);
+        color: var(--ink); font: inherit; font-size: 13.5px; font-weight: 500;
+        padding: 7px 12px; border-radius: 999px; cursor: pointer;
+      }
+      .chip:hover { border-color: var(--green); }
+      .chip b { color: var(--green); font-weight: 700; }
+      select, input[type="number"], input[type="text"] {
+        font: inherit; color: var(--ink); background: var(--surface);
+        border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px; width: 100%;
+      }
+      select:focus, input:focus { outline: 2px solid var(--green); outline-offset: 1px; border-color: var(--green); }
+      label.field-label { display: block; font-size: 13.5px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+
+      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      @media (max-width: 620px) { .two-col { grid-template-columns: 1fr; } }
+      .floor-block { background: var(--surface-2); border-radius: 12px; padding: 14px; }
+      .floor-block h3 { margin: 0 0 10px; font-size: 14.5px; font-weight: 700; }
+
+      /* Switch rows */
+      .switch-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; }
+      .switch-row + .switch-row { border-top: 1px dashed var(--line); }
+      .switch-row .txt { flex: 1; min-width: 0; }
+      .switch-row .txt b { display: block; font-size: 15px; font-weight: 600; }
+      .switch-row .txt span { display: block; color: var(--muted); font-size: 13px; line-height: 1.4; }
+      .switch-row .amt { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 15px; }
+      .switch { appearance: none; border: none; background: transparent; padding: 0; position: relative; flex: 0 0 auto; width: 46px; height: 27px; display: inline-block; cursor: pointer; border-radius: 999px; }
+      .switch .track { position: absolute; inset: 0; background: var(--line); border-radius: 999px; transition: background .15s ease; }
+      .switch .track::after {
+        content: ""; position: absolute; top: 3px; left: 3px; width: 21px; height: 21px; border-radius: 50%;
+        background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3); transition: transform .15s ease;
+      }
+      .switch[aria-checked="true"] .track { background: var(--green); }
+      .switch[aria-checked="true"] .track::after { transform: translateX(19px); }
+      .switch:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+      .sub-control { padding: 2px 0 12px 0; }
+      .sub-control[hidden] { display: none; }
+      .stepper { display: inline-flex; align-items: center; gap: 0; border: 1.5px solid var(--line); border-radius: 10px; overflow: hidden; }
+      .stepper button { appearance: none; border: none; background: var(--surface-2); width: 38px; height: 40px; font-size: 18px; font-weight: 700; color: var(--ink); cursor: pointer; }
+      .stepper output { min-width: 74px; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+      .inline-note { color: var(--muted); font-size: 13px; margin-left: 10px; }
+
+      /* Summary panel */
+      .summary {
+        background: linear-gradient(180deg, var(--panel), var(--panel-2));
+        color: var(--panel-ink); border-radius: 16px; padding: 24px 24px 20px;
+        position: sticky; top: 16px; box-shadow: var(--shadow);
+      }
+      @media (max-width: 980px) { .summary { position: static; } }
+      .summary .kicker { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--panel-muted); margin: 0 0 4px; }
+      .total-range { font-size: clamp(30px, 4vw, 40px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; font-variant-numeric: tabular-nums; margin: 0; }
+      .total-mid { color: var(--panel-muted); font-size: 14.5px; margin: 6px 0 0; }
+      .total-mid b { color: var(--panel-ink); font-variant-numeric: tabular-nums; }
+      .total-note { font-size: 12.5px; color: var(--panel-muted); margin: 8px 0 0; line-height: 1.5; }
+      .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 4px; }
+      .meta-grid .m { border-top: 1px solid var(--panel-line); padding-top: 10px; }
+      .meta-grid .m span { display: block; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--panel-muted); }
+      .meta-grid .m b { display: block; font-size: 15.5px; font-weight: 700; margin-top: 2px; }
+      .breakdown { margin-top: 16px; border-top: 1px solid var(--panel-line); padding-top: 14px; }
+      .b-row { margin-bottom: 10px; }
+      .b-row .b-top { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
+      .b-row .b-top span { color: var(--panel-muted); }
+      .b-row .b-top b { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+      .b-bar { height: 5px; border-radius: 3px; background: rgba(242,239,226,.14); margin-top: 4px; overflow: hidden; }
+      .b-bar i { display: block; height: 100%; background: var(--panel-bar); border-radius: 3px; transition: width .3s ease; }
+      .b-row.major .b-top { font-size: 15px; }
+      .b-row.major .b-top span { color: var(--panel-ink); font-weight: 700; }
+      .b-row.major .b-top b { font-weight: 800; }
+      .gst-row { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--panel-line); font-size: 14px; }
+      .gst-row .txt { flex: 1; color: var(--panel-muted); }
+      .gst-row .txt b { color: var(--panel-ink); display: block; font-size: 14.5px; }
+      .summary .switch .track { background: rgba(242,239,226,.25); }
+      .summary .switch[aria-checked="true"] .track { background: var(--panel-bar); }
+
+      .quote-check { margin-top: 18px; background: rgba(242,239,226,.07); border: 1px solid var(--panel-line); border-radius: 12px; padding: 16px; }
+      .quote-check h3 { margin: 0 0 4px; font-size: 15.5px; font-weight: 700; }
+      .quote-check p { margin: 0 0 10px; font-size: 13.5px; color: var(--panel-muted); }
+      .quote-check .qc-row { display: flex; gap: 8px; }
+      .quote-check input {
+        background: rgba(10, 20, 15, .35); border-color: var(--panel-line); color: var(--panel-ink);
+      }
+      .quote-check input::placeholder { color: var(--panel-muted); }
+      .verdict { margin-top: 10px; font-size: 14px; line-height: 1.45; border-radius: 9px; padding: 10px 12px; display: none; }
+      .verdict.show { display: block; }
+      .verdict.fair { background: rgba(67,177,131,.18); }
+      .verdict.low { background: rgba(232,163,61,.18); }
+      .verdict.high { background: rgba(224,122,108,.20); }
+      .verdict b { display: block; font-size: 14.5px; margin-bottom: 2px; }
+      .copy-btn {
+        appearance: none; width: 100%; margin-top: 16px; border: none; cursor: pointer;
+        background: var(--panel-bar); color: #23180a; font: inherit; font-weight: 800; font-size: 15px;
+        padding: 13px; border-radius: 11px;
+      }
+      .copy-btn:active { transform: translateY(1px); }
+      .panel-note { font-size: 12.5px; color: var(--panel-muted); margin: 12px 0 0; line-height: 1.5; }
+
+      /* Below-fold sections */
+      .below { margin-top: 28px; display: grid; gap: 24px; }
+      .below .card { padding: 24px 26px; }
+      @media (max-width: 560px) { .below .card { padding: 20px 18px; } }
+      .below h2 { font-size: 21px; font-weight: 800; letter-spacing: -0.015em; margin: 0 0 6px; }
+      .below .sub { color: var(--muted); margin: 0 0 16px; max-width: 70ch; }
+      table.rate-card { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+      table.rate-card th, table.rate-card td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+      table.rate-card th { font-size: 12.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+      table.rate-card td:first-child { font-weight: 700; }
+      table.rate-card tr:last-child td { border-bottom: none; }
+      .table-scroll { overflow-x: auto; }
+      @media (max-width: 560px) { table.rate-card th, table.rate-card td { padding: 8px 8px; font-size: 13.5px; } }
+      .factor-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 28px; }
+      @media (max-width: 680px) { .factor-grid { grid-template-columns: 1fr; } }
+      .factor h3 { margin: 0 0 4px; font-size: 15.5px; font-weight: 700; }
+      .factor p { margin: 0; color: var(--muted); font-size: 14.5px; }
+      ul.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+      ul.checks li { display: flex; gap: 11px; font-size: 15px; align-items: flex-start; }
+      ul.checks li svg { flex: 0 0 auto; margin-top: 2px; }
+      ul.checks li span { color: var(--muted); }
+      ul.checks li b { color: var(--ink); font-weight: 600; }
+      footer { margin-top: 30px; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+      footer a { color: var(--green); font-weight: 600; }
+      a { color: var(--green); }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="masthead">
+        <div class="truck-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f2efe2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1.5 5.5h12v11h-12z" fill="rgba(242,239,226,.16)"/>
+            <path d="M13.5 9.5h4l3 3.5v3.5h-7"/>
+            <circle cx="6" cy="18.6" r="1.9"/><circle cx="17" cy="18.6" r="1.9"/>
+            <path d="M7.9 18.6h7.2M1.5 18.6h2.6M18.9 18.6h3.6"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Packers &amp; Movers Estimator</h1>
+          <p class="lede">Budget a house shift in Bangalore before the quotes start flying. Built from <strong>published 2026 rate guides and actual booking data</strong>, not one mover's price list — so you can spot a padded quote when you see one.</p>
+        </div>
+      </header>
+
+      <div class="layout">
+        <form class="card form-card" id="estimator" autocomplete="off">
+          <!-- Step 1: move type -->
+          <section class="step">
+            <div class="step-head"><span class="step-num">1</span><h2>Where are you moving?</h2><p>Rates differ a lot between the two</p></div>
+            <div class="segmented" role="group" aria-label="Move type">
+              <button type="button" id="type-local" aria-pressed="true">Within Bangalore<small>Local shifting, same day</small></button>
+              <button type="button" id="type-intercity" aria-pressed="false">Leaving Bangalore<small>To another city, 1–5 days</small></button>
+            </div>
+          </section>
+
+          <!-- Step 2: home size -->
+          <section class="step">
+            <div class="step-head"><span class="step-num">2</span><h2>Home size</h2><p>Sets truck size and crew</p></div>
+            <div class="choices cols-3" id="size-choices">
+              <label class="choice"><input type="radio" name="size" value="studio" /><span class="box"><b>1 RK / Studio</b><span>Mini truck · 2 movers</span></span></label>
+              <label class="choice"><input type="radio" name="size" value="1bhk" checked /><span class="box"><b>1 BHK</b><span>10-ft truck · 2–3 movers</span></span></label>
+              <label class="choice"><input type="radio" name="size" value="2bhk" /><span class="box"><b>2 BHK</b><span>14-ft truck · 3–4 movers</span></span></label>
+              <label class="choice"><input type="radio" name="size" value="2.5bhk" /><span class="box"><b>2.5 BHK</b><span>14-ft truck · 4 movers</span></span></label>
+              <label class="choice"><input type="radio" name="size" value="3bhk" /><span class="box"><b>3 BHK</b><span>17-ft truck · 4–5 movers</span></span></label>
+              <label class="choice"><input type="radio" name="size" value="4bhk" /><span class="box"><b>4 BHK / Villa</b><span>19-ft truck · 5–6 movers</span></span></label>
+            </div>
+          </section>
+
+          <!-- Step 3: distance -->
+          <section class="step">
+            <div class="step-head"><span class="step-num">3</span><h2>Distance</h2><p>Road distance, door to door</p></div>
+            <div id="dest-block" hidden>
+              <label class="field-label" for="destination">Destination city</label>
+              <select id="destination">
+                <option value="350" selected>Chennai · ~350 km</option>
+                <option value="365">Coimbatore · ~365 km</option>
+                <option value="570">Hyderabad · ~570 km</option>
+                <option value="550">Kochi · ~550 km</option>
+                <option value="560">Goa · ~560 km</option>
+                <option value="840">Pune · ~840 km</option>
+                <option value="980">Mumbai · ~980 km</option>
+                <option value="2150">Delhi · ~2,150 km</option>
+                <option value="custom">Other city — set distance below</option>
+              </select>
+              <div style="height:14px"></div>
+              <label class="field-label">Load type</label>
+              <div class="choices cols-2" id="load-choices">
+                <label class="choice"><input type="radio" name="load" value="shared" checked /><span class="box"><b>Shared (part-load)</b><span>Truck space shared with other homes. Cheaper, delivery window is wider.</span></span></label>
+                <label class="choice"><input type="radio" name="load" value="dedicated" /><span class="box"><b>Dedicated truck</b><span>Whole truck is yours. Faster, fixed delivery date, costs more.</span></span></label>
+              </div>
+              <div style="height:14px"></div>
+            </div>
+            <div class="dist-row">
+              <span class="dist-value"><span id="dist-num">15</span> <small>km</small></span>
+            </div>
+            <input type="range" id="distance" min="2" max="60" step="1" value="15" aria-label="Distance in kilometres" />
+            <div class="scale-labels"><span id="dist-min-label">2 km</span><span id="dist-max-label">60 km</span></div>
+            <div class="chips" id="route-chips">
+              <button type="button" class="chip" data-km="4">Koramangala → HSR Layout · <b>~4 km</b></button>
+              <button type="button" class="chip" data-km="5">Indiranagar → MG Road · <b>~5 km</b></button>
+              <button type="button" class="chip" data-km="8">Whitefield → Marathahalli · <b>~8 km</b></button>
+              <button type="button" class="chip" data-km="10">Hebbal → Yelahanka · <b>~10 km</b></button>
+              <button type="button" class="chip" data-km="13">Electronic City → Bannerghatta Rd · <b>~13 km</b></button>
+              <button type="button" class="chip" data-km="22">JP Nagar → Hebbal · <b>~22 km</b></button>
+              <button type="button" class="chip" data-km="35">Whitefield → Electronic City · <b>~35 km</b></button>
+              <button type="button" class="chip" data-km="48">Yelahanka → Kengeri · <b>~48 km</b></button>
+            </div>
+          </section>
+
+          <!-- Step 4: floors -->
+          <section class="step">
+            <div class="step-head"><span class="step-num">4</span><h2>Floors &amp; lift</h2><p>Stairs are charged per floor, per end</p></div>
+            <div class="two-col">
+              <div class="floor-block">
+                <h3>Pickup (current home)</h3>
+                <label class="field-label" for="floor-from">Floor</label>
+                <select id="floor-from">
+                  <option value="0" selected>Ground floor</option>
+                  <option value="1">1st floor</option>
+                  <option value="2">2nd floor</option>
+                  <option value="3">3rd floor</option>
+                  <option value="4">4th floor</option>
+                  <option value="5">5th floor or higher</option>
+                </select>
+                <div class="switch-row">
+                  <div class="txt"><b>Service lift available</b><span>Big enough for a sofa / fridge</span></div>
+                  <button type="button" class="switch" id="lift-from" role="switch" aria-checked="true" aria-label="Service lift available at pickup"><span class="track"></span></button>
+                </div>
+              </div>
+              <div class="floor-block">
+                <h3>Drop (new home)</h3>
+                <label class="field-label" for="floor-to">Floor</label>
+                <select id="floor-to">
+                  <option value="0" selected>Ground floor</option>
+                  <option value="1">1st floor</option>
+                  <option value="2">2nd floor</option>
+                  <option value="3">3rd floor</option>
+                  <option value="4">4th floor</option>
+                  <option value="5">5th floor or higher</option>
+                </select>
+                <div class="switch-row">
+                  <div class="txt"><b>Service lift available</b><span>Big enough for a sofa / fridge</span></div>
+                  <button type="button" class="switch" id="lift-to" role="switch" aria-checked="true" aria-label="Service lift available at drop"><span class="track"></span></button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step 5: packing & timing -->
+          <section class="step">
+            <div class="step-head"><span class="step-num">5</span><h2>Packing quality</h2><p>The biggest quality lever in the quote</p></div>
+            <div class="choices cols-3" id="pack-choices">
+              <label class="choice"><input type="radio" name="packing" value="basic" /><span class="box"><b>Basic</b><span>Single-layer wrap, your own cartons where possible.</span><span class="price-hint">Saves ~30% on packing</span></span></label>
+              <label class="choice"><input type="radio" name="packing" value="standard" checked /><span class="box"><b>Standard</b><span>Bubble wrap + cartons + stretch film on furniture.</span><span class="price-hint">What most homes need</span></span></label>
+              <label class="choice"><input type="radio" name="packing" value="premium" /><span class="box"><b>Premium</b><span>Multi-layer: foam, bubble, corrugated, waterproof lamination.</span><span class="price-hint">For TVs, glass, antiques</span></span></label>
+            </div>
+            <div style="height:16px"></div>
+            <label class="field-label" for="timing">When are you moving?</label>
+            <select id="timing">
+              <option value="1" selected>Mid-month weekday — best rates</option>
+              <option value="1.08">Weekend — slightly higher demand</option>
+              <option value="1.18">Month-end (25th–31st) — peak pricing, book early</option>
+            </select>
+          </section>
+
+          <!-- Step 6: add-ons -->
+          <section class="step">
+            <div class="step-head"><span class="step-num">6</span><h2>Add-ons</h2><p>Only what you actually need</p></div>
+
+            <div class="switch-row">
+              <div class="txt"><b>Transit insurance</b><span>Covers damage/loss in transit, ~3% of declared goods value</span></div>
+              <span class="amt" id="amt-insurance">—</span>
+              <button type="button" class="switch" id="addon-insurance" role="switch" aria-checked="false" aria-label="Add transit insurance"><span class="track"></span></button>
+            </div>
+            <div class="sub-control" id="insurance-control" hidden>
+              <div class="dist-row"><span class="dist-value" style="font-size:24px">₹<span id="ins-value-num">3,00,000</span></span><small style="color:var(--muted)">declared value of goods</small></div>
+              <input type="range" id="ins-value" min="50000" max="2000000" step="25000" value="300000" aria-label="Declared value of goods in rupees" />
+              <div class="scale-labels"><span>₹50,000</span><span>₹20,00,000</span></div>
+            </div>
+
+            <div class="switch-row">
+              <div class="txt"><b>Unpacking &amp; arranging</b><span>Crew unpacks and places furniture at the new home</span></div>
+              <span class="amt" id="amt-unpack">—</span>
+              <button type="button" class="switch" id="addon-unpack" role="switch" aria-checked="false" aria-label="Add unpacking and arranging"><span class="track"></span></button>
+            </div>
+
+            <div class="switch-row">
+              <div class="txt"><b>AC uninstall + reinstall</b><span>Split AC, per unit, both ends included</span></div>
+              <span class="amt" id="amt-ac">—</span>
+              <button type="button" class="switch" id="addon-ac" role="switch" aria-checked="false" aria-label="Add AC uninstall and reinstall"><span class="track"></span></button>
+            </div>
+            <div class="sub-control" id="ac-control" hidden>
+              <span class="stepper">
+                <button type="button" id="ac-minus" aria-label="Fewer AC units">−</button>
+                <output id="ac-count">1 unit</output>
+                <button type="button" id="ac-plus" aria-label="More AC units">+</button>
+              </span>
+              <span class="inline-note">₹2,500 per unit</span>
+            </div>
+
+            <div class="switch-row">
+              <div class="txt"><b>Temporary storage</b><span>Goods held in the mover's warehouse between homes</span></div>
+              <span class="amt" id="amt-storage">—</span>
+              <button type="button" class="switch" id="addon-storage" role="switch" aria-checked="false" aria-label="Add temporary storage"><span class="track"></span></button>
+            </div>
+            <div class="sub-control" id="storage-control" hidden>
+              <span class="stepper">
+                <button type="button" id="storage-minus" aria-label="Fewer storage days">−</button>
+                <output id="storage-count">7 days</output>
+                <button type="button" id="storage-plus" aria-label="More storage days">+</button>
+              </span>
+              <span class="inline-note" id="storage-rate-note">per-day rate by home size</span>
+            </div>
+
+            <div id="vehicle-addons">
+              <div class="switch-row">
+                <div class="txt"><b>Bike / scooter transport</b><span>Cratted and carried with the household load</span></div>
+                <span class="amt">₹4,500</span>
+                <button type="button" class="switch" id="addon-bike" role="switch" aria-checked="false" aria-label="Add bike or scooter transport"><span class="track"></span></button>
+              </div>
+              <div class="switch-row">
+                <div class="txt"><b>Car transport</b><span>Enclosed carrier, door-to-door</span></div>
+                <span class="amt">₹14,000</span>
+                <button type="button" class="switch" id="addon-car" role="switch" aria-checked="false" aria-label="Add car transport"><span class="track"></span></button>
+              </div>
+            </div>
+          </section>
+        </form>
+
+        <!-- Summary -->
+        <aside class="summary" aria-live="polite">
+          <p class="kicker">Your estimate</p>
+          <p class="total-range" id="total-range">₹—</p>
+          <p class="total-mid">Most likely around <b id="total-mid">₹—</b> <span id="gst-note">including 18% GST</span></p>
+          <p class="total-note">The range spans budget part-load quotes to premium full-service quotes for this exact move. The breakdown below is the typical middle, line by line.</p>
+          <div class="meta-grid">
+            <div class="m"><span>Truck &amp; crew</span><b id="meta-truck">—</b></div>
+            <div class="m"><span>Time needed</span><b id="meta-time">—</b></div>
+          </div>
+          <div class="breakdown" id="breakdown"></div>
+          <div class="gst-row">
+            <div class="txt"><b>Show 18% GST</b>Legit movers bill GST separately — a quote with no tax line is a red flag.</div>
+            <button type="button" class="switch" id="gst-toggle" role="switch" aria-checked="true" aria-label="Show 18 percent GST"><span class="track"></span></button>
+          </div>
+          <div class="quote-check">
+            <h3>Already got a quote?</h3>
+            <p>Paste it here and see where it sits against the market range for this exact move.</p>
+            <div class="qc-row">
+              <input type="text" inputmode="numeric" id="quote-input" placeholder="e.g. 14500" aria-label="Quote you received, in rupees" />
+            </div>
+            <div class="verdict" id="quote-verdict"></div>
+          </div>
+          <button type="button" class="copy-btn" id="copy-btn">Copy this estimate</button>
+          <p class="panel-note">Estimate, not a binding quote. Final prices depend on a physical or video survey of your actual inventory. Compiled Nov 2026 from the published guides listed below.</p>
+        </aside>
+      </div>
+
+      <div class="below">
+        <div class="card">
+          <h2>The 2026 Bangalore rate card</h2>
+          <p class="sub">What published guides and actual booking data say a local move (under ~10–15 km, lift access, standard packing) costs, before GST. If a quote lands far outside these bands, ask why.</p>
+          <div class="table-scroll">
+            <table class="rate-card">
+              <thead>
+                <tr><th>Home size</th><th>AssureShift (0–15 km)</th><th>NoBroker — avg actually paid</th><th>StoreMyGoods (&lt;10 km)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1 BHK</td><td>₹2,800 – ₹5,800</td><td>₹3,800</td><td>₹5,000 – ₹12,000</td></tr>
+                <tr><td>2 BHK</td><td>₹4,000 – ₹8,500</td><td>₹7,300</td><td>₹8,000 – ₹18,000</td></tr>
+                <tr><td>3 BHK</td><td>₹5,500 – ₹11,000</td><td>₹12,200</td><td>₹12,000 – ₹28,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="sub" style="margin:14px 0 0">Intercity runs roughly <strong>₹25–35/km for a 1 BHK, ₹30–45/km for a 2 BHK and ₹40–60/km for a 3 BHK</strong> for the transport leg, plus packing and labour. NoBroker's averages skew low because they include part-load and transport-heavy bookings; full-service quotes sit higher.</p>
+        </div>
+
+        <div class="card">
+          <h2>What actually moves the price</h2>
+          <p class="sub">Four levers explain almost every gap between two quotes for the same house.</p>
+          <div class="factor-grid">
+            <div class="factor">
+              <h3>Distance and truck size</h3>
+              <p>Transport is billed on the truck, not your stuff: a 17-ft truck costs roughly double a Tata Ace per km. An oversized truck "for safety" is a classic padding line.</p>
+            </div>
+            <div class="factor">
+              <h3>Floors without a lift</h3>
+              <p>Stair carrying for heavy items typically adds ₹500–₹2,000 per floor. It applies at both ends, and again if the truck can't park near the entrance.</p>
+            </div>
+            <div class="factor">
+              <h3>Packing grade</h3>
+              <p>Multi-layer packing (foam + bubble + corrugated + lamination) can add 50–60% to the packing line. Worth it for TVs and glass; waste on clothes and books.</p>
+            </div>
+            <div class="factor">
+              <h3>Timing and truck-entry windows</h3>
+              <p>Month-end weekends are peak season in Bangalore — every lease in the city seems to end on the 30th. BBMP truck-entry restrictions can also stretch a move by 1–2 hours.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Before you pay a token advance</h2>
+          <p class="sub">Most moving-day horror stories from Bangalore start with one of these being skipped.</p>
+          <ul class="checks">
+            <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>Get an itemised quote in writing.</b> <span>Packing, labour, transport and taxes as separate lines. A single lump sum hides where the padding is.</span></div></li>
+            <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>Cap the advance at 10–20%.</b> <span>Balance after unloading. A mover demanding 50%+ upfront before the truck arrives is a risk, not a discount.</span></div></li>
+            <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>Insist on a GST invoice.</b> <span>18% GST is mandatory on a legitimate bill. "No bill, lower price" also means no proof if your goods are damaged or held.</span></div></li>
+            <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>Sign an inventory list at loading.</b> <span>Every item and its condition, countersigned by the crew lead. It is your only leverage in a damage claim.</span></div></li>
+            <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>Book the lift with your society.</b> <span>Many Bangalore apartments need a prior booking and a refundable deposit for moving day; some ban Sunday moves. Check before fixing the date.</span></div></li>
+            <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>Confirm dismantling in the quote.</b> <span>Beds, wardrobes and wall units: who dismantles, who reassembles, and is it priced in? "We'll see on the day" means an extra charge on the day.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <footer>
+        Rates compiled from public 2026 sources:
+        <a href="https://www.assureshift.in/blog/packers-and-movers-bangalore-charges" target="_blank" rel="noopener">AssureShift Bangalore charges guide</a>,
+        <a href="https://www.nobroker.in/packers-and-movers/guides/packers-and-movers-charges-in-bangalore/" target="_blank" rel="noopener">NoBroker booking data</a>,
+        <a href="https://blog.storemygoods.in/bangalore-relocation-easy-professional-packers-movers/" target="_blank" rel="noopener">StoreMyGoods relocation guide</a>,
+        <a href="https://intercitypackermover.com/blogs/how-much-do-packers-and-movers-charge-in-bangalore/" target="_blank" rel="noopener">InterCity Packers &amp; Movers cost guide</a>.
+        Distances are approximate road distances. This tool is independent and not affiliated with any moving company.
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        // Rate model calibrated to published 2026 Bangalore guides (see sources in footer).
+        var SIZES = {
+          studio:  { name: "1 RK / Studio", truck: "Tata Ace · 2 movers",        pack: 1200, labour: 1000, tBase: 1800, tKm: 60,  icKm: 28, floorRate: 400,  unpack: 800,  storageDay: 200, hours: [3, 5] },
+          "1bhk":  { name: "1 BHK",         truck: "10-ft truck · 2–3 movers",   pack: 2200, labour: 1600, tBase: 2400, tKm: 70,  icKm: 32, floorRate: 500,  unpack: 1200, storageDay: 300, hours: [4, 6] },
+          "2bhk":  { name: "2 BHK",         truck: "14-ft truck · 3–4 movers",   pack: 3400, labour: 2400, tBase: 3400, tKm: 90,  icKm: 40, floorRate: 600,  unpack: 1800, storageDay: 450, hours: [6, 8] },
+          "2.5bhk":{ name: "2.5 BHK",       truck: "14-ft truck · 4 movers",     pack: 4200, labour: 2800, tBase: 3800, tKm: 100, icKm: 44, floorRate: 700,  unpack: 2200, storageDay: 550, hours: [7, 9] },
+          "3bhk":  { name: "3 BHK",         truck: "17-ft truck · 4–5 movers",   pack: 5200, labour: 3400, tBase: 4600, tKm: 110, icKm: 50, floorRate: 800,  unpack: 2800, storageDay: 650, hours: [8, 11] },
+          "4bhk":  { name: "4 BHK / Villa", truck: "19-ft truck · 5–6 movers",   pack: 7500, labour: 4800, tBase: 6500, tKm: 150, icKm: 65, floorRate: 1000, unpack: 4000, storageDay: 900, hours: [10, 14] }
+        };
+        var PACK_MULT = { basic: 0.7, standard: 1.0, premium: 1.6 };
+        var AC_RATE = 2500, BIKE_RATE = 4500, CAR_RATE = 14000;
+
+        var state = { moveType: "local", acCount: 1, storageDays: 7 };
+
+        function $(id) { return document.getElementById(id); }
+        function fmt(n) { return "₹" + Math.round(n).toLocaleString("en-IN"); }
+        function roundRange(n) { return n >= 5000 ? Math.round(n / 100) * 100 : Math.round(n / 50) * 50; }
+        function swOn(id) { return $(id).getAttribute("aria-checked") === "true"; }
+        function setSw(id, on) { $(id).setAttribute("aria-checked", on ? "true" : "false"); }
+        function checkedVal(name, fallback) {
+          var el = document.querySelector('input[name="' + name + '"]:checked');
+          return el ? el.value : fallback;
+        }
+
+        var form = $("estimator");
+        var distSlider = $("distance");
+        var lastEstimate = null;
+
+        function setMoveType(type) {
+          state.moveType = type;
+          $("type-local").setAttribute("aria-pressed", type === "local" ? "true" : "false");
+          $("type-intercity").setAttribute("aria-pressed", type === "intercity" ? "true" : "false");
+          var inter = type === "intercity";
+          $("dest-block").hidden = !inter;
+          $("route-chips").style.display = inter ? "none" : "";
+          $("vehicle-addons").style.display = inter ? "" : "none";
+          if (inter) {
+            distSlider.min = 50; distSlider.max = 2500; distSlider.step = 10;
+            var dest = $("destination").value;
+            distSlider.value = dest === "custom" ? 600 : dest;
+            $("dist-min-label").textContent = "50 km";
+            $("dist-max-label").textContent = "2,500 km";
+          } else {
+            distSlider.min = 2; distSlider.max = 60; distSlider.step = 1;
+            distSlider.value = 15;
+            $("dist-min-label").textContent = "2 km";
+            $("dist-max-label").textContent = "60 km";
+            setSw("addon-bike", false);
+            setSw("addon-car", false);
+          }
+          recalc();
+        }
+
+        function recalc() {
+          var size = SIZES[checkedVal("size", "1bhk")];
+          var inter = state.moveType === "intercity";
+          var km = parseInt(distSlider.value, 10);
+          $("dist-num").textContent = km.toLocaleString("en-IN");
+
+          // Core components
+          var packMult = PACK_MULT[checkedVal("packing", "standard")];
+          var pack = size.pack * packMult * (inter ? 1.3 : 1); // sturdier packing for highway moves
+          var labour = size.labour * (inter ? 1.15 : 1);
+          var transport, transportLabel;
+          if (inter) {
+            var loadMult = checkedVal("load", "shared") === "dedicated" ? 1.15 : 0.8;
+            transport = size.icKm * km * loadMult;
+            transportLabel = "Transport (" + km.toLocaleString("en-IN") + " km, " + (loadMult > 1 ? "dedicated" : "shared") + ")";
+          } else {
+            transport = size.tBase + Math.max(0, km - 10) * size.tKm;
+            transportLabel = "Transport (" + km + " km)";
+          }
+          var tolls = inter ? Math.round(km * 3) : 0;
+
+          var floorFrom = parseInt($("floor-from").value, 10);
+          var floorTo = parseInt($("floor-to").value, 10);
+          var floors = 0;
+          if (!swOn("lift-from")) floors += floorFrom * size.floorRate;
+          if (!swOn("lift-to")) floors += floorTo * size.floorRate;
+
+          var core = pack + labour + transport + tolls + floors;
+          var timingMult = parseFloat($("timing").value);
+          var peak = core * (timingMult - 1);
+
+          // Add-ons
+          var addons = [];
+          var insVal = parseInt($("ins-value").value, 10);
+          $("ins-value-num").textContent = insVal.toLocaleString("en-IN");
+          var insPremium = Math.round(insVal * 0.03);
+          $("amt-insurance").textContent = fmt(insPremium);
+          if (swOn("addon-insurance")) addons.push({ label: "Transit insurance (3% of " + fmt(insVal) + ")", amt: insPremium });
+
+          $("amt-unpack").textContent = fmt(size.unpack);
+          if (swOn("addon-unpack")) addons.push({ label: "Unpacking & arranging", amt: size.unpack });
+
+          $("amt-ac").textContent = fmt(AC_RATE * state.acCount);
+          $("ac-count").textContent = state.acCount + (state.acCount === 1 ? " unit" : " units");
+          if (swOn("addon-ac")) addons.push({ label: "AC uninstall + reinstall × " + state.acCount, amt: AC_RATE * state.acCount });
+
+          var storageCost = size.storageDay * state.storageDays;
+          $("amt-storage").textContent = fmt(storageCost);
+          $("storage-count").textContent = state.storageDays + (state.storageDays === 1 ? " day" : " days");
+          $("storage-rate-note").textContent = fmt(size.storageDay) + " per day for a " + size.name;
+          if (swOn("addon-storage")) addons.push({ label: "Storage × " + state.storageDays + " days", amt: storageCost });
+
+          if (inter && swOn("addon-bike")) addons.push({ label: "Bike / scooter transport", amt: BIKE_RATE });
+          if (inter && swOn("addon-car")) addons.push({ label: "Car transport (carrier)", amt: CAR_RATE });
+
+          var addonsTotal = addons.reduce(function (s, a) { return s + a.amt; }, 0);
+          var subtotal = core + peak + addonsTotal;
+
+          var gstOn = swOn("gst-toggle");
+          var gst = gstOn ? subtotal * 0.18 : 0;
+          var total = subtotal + gst;
+          var low = roundRange(total * 0.85);
+          var high = roundRange(total * 1.3);
+
+          $("total-range").textContent = fmt(low) + " – " + fmt(high);
+          $("total-mid").textContent = fmt(roundRange(total));
+          $("gst-note").textContent = gstOn ? "including 18% GST" : "before GST";
+          $("meta-truck").textContent = size.truck;
+          if (inter) {
+            var dLow = Math.max(1, Math.round(km / 500));
+            $("meta-time").textContent = dLow + "–" + (dLow + 2) + " days door to door";
+          } else {
+            var extra = km > 25 ? 2 : (km > 15 ? 1 : 0);
+            $("meta-time").textContent = (size.hours[0] + extra) + "–" + (size.hours[1] + extra) + " hrs, same day";
+          }
+
+          // Breakdown rows
+          var lines = [
+            { label: "Packing (materials + labour)", amt: pack },
+            { label: "Loading & unloading crew", amt: labour },
+            { label: transportLabel, amt: transport }
+          ];
+          if (tolls > 0) lines.push({ label: "Tolls & state entry", amt: tolls });
+          if (floors > 0) lines.push({ label: "Stair carrying (no lift)", amt: floors });
+          if (peak > 0) lines.push({ label: "Peak-day pricing", amt: peak });
+          addons.forEach(function (a) { lines.push({ label: a.label, amt: a.amt }); });
+          var maxAmt = Math.max.apply(null, lines.map(function (l) { return l.amt; }).concat([subtotal]));
+
+          var html = "";
+          lines.forEach(function (l) {
+            var w = Math.max(3, Math.round((l.amt / maxAmt) * 100));
+            html += '<div class="b-row"><div class="b-top"><span>' + l.label + '</span><b>' + fmt(l.amt) + '</b></div><div class="b-bar"><i style="width:' + w + '%"></i></div></div>';
+          });
+          html += '<div class="b-row major"><div class="b-top"><span>Subtotal</span><b>' + fmt(subtotal) + '</b></div></div>';
+          if (gstOn) html += '<div class="b-row"><div class="b-top"><span>GST @ 18%</span><b>' + fmt(gst) + '</b></div></div>';
+          html += '<div class="b-row major"><div class="b-top"><span>' + (gstOn ? "Total incl. GST" : "Total before GST") + '</span><b>' + fmt(Math.round(total)) + '</b></div></div>';
+          $("breakdown").innerHTML = html;
+
+          lastEstimate = {
+            low: low, high: high, mid: roundRange(total), sizeName: size.name,
+            km: km, inter: inter, gstOn: gstOn, lines: lines, subtotal: subtotal, gst: gst
+          };
+          updateVerdict();
+        }
+
+        function updateVerdict() {
+          var box = $("quote-verdict");
+          var raw = $("quote-input").value.replace(/[^0-9]/g, "");
+          if (!raw || !lastEstimate) { box.className = "verdict"; box.innerHTML = ""; return; }
+          var q = parseInt(raw, 10);
+          var e = lastEstimate;
+          var cls, title, body;
+          if (q < e.low * 0.8) {
+            cls = "low"; title = "Suspiciously cheap";
+            body = "Well below the market range for this move. Check what is excluded — packing material, dismantling, GST and insurance are the usual missing lines — and never pay a large advance.";
+          } else if (q < e.low) {
+            cls = "low"; title = "Below the typical range";
+            body = "Cheaper than most full-service quotes for this move. Plausible for a part-load or basic packing, but get the inclusions in writing before you book.";
+          } else if (q <= e.high) {
+            cls = "fair"; title = "Within the fair range";
+            body = "This sits inside the typical market range (" + fmt(e.low) + " – " + fmt(e.high) + ") for this move. Compare inclusions, not just the total, against one more quote.";
+          } else if (q <= e.high * 1.25) {
+            cls = "high"; title = "Above the typical range";
+            body = "Higher than most quotes for this move. Ask for the itemised breakup and push on transport and packing — those two lines carry most of the padding.";
+          } else {
+            cls = "high"; title = "Well above market";
+            body = "This is priced far beyond the typical range (" + fmt(e.low) + " – " + fmt(e.high) + "). Get two more quotes before paying anything; do not negotiate from this anchor alone.";
+          }
+          box.className = "verdict show " + cls;
+          box.innerHTML = "<b>" + title + "</b>" + body;
+        }
+
+        // Wiring
+        $("type-local").addEventListener("click", function () { setMoveType("local"); });
+        $("type-intercity").addEventListener("click", function () { setMoveType("intercity"); });
+        $("destination").addEventListener("change", function () {
+          if (this.value !== "custom") distSlider.value = this.value;
+          recalc();
+        });
+        document.querySelectorAll("#route-chips .chip").forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            distSlider.value = chip.getAttribute("data-km");
+            recalc();
+          });
+        });
+        ["lift-from", "lift-to", "addon-insurance", "addon-unpack", "addon-ac", "addon-storage", "addon-bike", "addon-car", "gst-toggle"].forEach(function (id) {
+          $(id).addEventListener("click", function () {
+            var on = !swOn(id);
+            setSw(id, on);
+            if (id === "addon-insurance") $("insurance-control").hidden = !on;
+            if (id === "addon-ac") $("ac-control").hidden = !on;
+            if (id === "addon-storage") $("storage-control").hidden = !on;
+            recalc();
+          });
+        });
+        $("ac-minus").addEventListener("click", function () { state.acCount = Math.max(1, state.acCount - 1); recalc(); });
+        $("ac-plus").addEventListener("click", function () { state.acCount = Math.min(6, state.acCount + 1); recalc(); });
+        $("storage-minus").addEventListener("click", function () { state.storageDays = Math.max(1, state.storageDays - 1); recalc(); });
+        $("storage-plus").addEventListener("click", function () { state.storageDays = Math.min(30, state.storageDays + 1); recalc(); });
+        $("quote-input").addEventListener("input", updateVerdict);
+        form.addEventListener("input", recalc);
+        form.addEventListener("change", recalc);
+        form.addEventListener("submit", function (ev) { ev.preventDefault(); });
+
+        $("copy-btn").addEventListener("click", function () {
+          var e = lastEstimate;
+          if (!e) return;
+          var txt = "Packers & Movers estimate — " + e.sizeName + ", " +
+            (e.inter ? "Bangalore to another city" : "within Bangalore") + ", " + e.km + " km\n" +
+            "Estimated range: " + fmt(e.low) + " – " + fmt(e.high) + (e.gstOn ? " (incl. 18% GST)" : " (before GST)") + "\n" +
+            "Most likely: " + fmt(e.mid) + "\n\nBreakdown (typical rates):\n" +
+            e.lines.map(function (l) { return "• " + l.label + ": " + fmt(l.amt); }).join("\n") +
+            "\n• Subtotal: " + fmt(e.subtotal) +
+            (e.gstOn ? "\n• GST @ 18%: " + fmt(e.gst) : "") +
+            "\n\nEstimate from published 2026 Bangalore rate guides; final quote needs a survey.";
+          var btn = $("copy-btn");
+          function done() {
+            btn.textContent = "Copied to clipboard";
+            setTimeout(function () { btn.textContent = "Copy this estimate"; }, 2200);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(txt).then(done, function () { fallback(); });
+          } else { fallback(); }
+          function fallback() {
+            var ta = document.createElement("textarea");
+            ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0";
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand("copy"); done(); } catch (err) { btn.textContent = "Copy failed — long-press the estimate instead"; }
+            document.body.removeChild(ta);
+          }
+        });
+
+        setMoveType("local");
+        recalc();
+      })();
+    </script>
+  </body>
+</html>
